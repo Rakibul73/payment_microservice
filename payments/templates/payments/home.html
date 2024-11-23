@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway Selection</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .gateway-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .gateway-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        .gateway-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .gateway-logo {
+            width: 120px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        
+        .gateway-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .gateway-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .select-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .select-btn:hover {
+            background-color: #45a049;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Your Payment Method</h1>
+        <div class="gateway-grid">
+            <div class="gateway-card" onclick="window.location.href='{% url 'stripe-checkout' %}'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" 
+                     alt="Stripe" class="gateway-logo">
+                <div class="gateway-name">Stripe</div>
+                <div class="gateway-description">
+                    Secure payments with credit cards and multiple payment methods
+                </div>
+                <button class="select-btn">Select Stripe</button>
+            </div>
+            
+            <div class="gateway-card" onclick="window.location.href='{% url 'sslcommerz-checkout' %}'">
+                <img src="https://sslcommerz.com/wp-content/uploads/2021/11/logo.png" 
+                     alt="SSLCommerz" class="gateway-logo">
+                <div class="gateway-name">SSLCommerz</div>
+                <div class="gateway-description">
+                    Popular payment gateway in Bangladesh
+                </div>
+                <button class="select-btn">Select SSLCommerz</button>
+            </div>
+            
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One-Time Payment</title>
+    <style>
+        .summary-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .price-detail {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Make a One-Time Payment</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="Your email" required><br><br>
+        
+        <label for="product_name">Product/Service:</label><br>
+        <input type="text" id="product_name" name="product_name" placeholder="Enter product name" required><br><br>
+        
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" placeholder="Enter product description" rows="3"></textarea><br><br>
+        
+        <label for="amount">Base Amount (USD):</label><br>
+        <input type="number" id="amount" name="amount" placeholder="Enter amount" required 
+               onchange="calculateTotal()"><br><br>
+        
+        <div class="summary-box">
+            <h3>Payment Summary</h3>
+            <div class="price-detail">
+                <span>Base Amount:</span>
+                <span id="base-amount">$0.00</span>
+            </div>
+            <div class="price-detail">
+                <span>VAT (0%):</span>
+                <span id="vat-amount">$0.00</span>
+            </div>
+            <div class="price-detail" style="font-weight: bold;">
+                <span>Total Amount:</span>
+                <span id="total-amount">$0.00</span>
+            </div>
+        </div>
+        
+        <input type="hidden" id="vat" name="vat" value="0">
+        <input type="hidden" id="total" name="total" value="0">
+        
+        <button type="submit">Pay</button>
+    </form>
+
+    <script>
+        function calculateTotal() {
+            const baseAmount = parseFloat(document.getElementById('amount').value) || 0;
+            const vatRate = 0.0; // 0% VAT
+            const vatAmount = baseAmount * vatRate;
+            const totalAmount = baseAmount + vatAmount;
+
+            document.getElementById('base-amount').textContent = `$${baseAmount.toFixed(2)}`;
+            document.getElementById('vat-amount').textContent = `$${vatAmount.toFixed(2)}`;
+            document.getElementById('total-amount').textContent = `$${totalAmount.toFixed(2)}`;
+            
+            document.getElementById('vat').value = vatAmount;
+            document.getElementById('total').value = totalAmount;
+        }
+    </script>
+</body>
+</html>

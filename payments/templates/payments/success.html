@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <style>
+        .payment-details {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-details">
+        <h1>Payment Successful!</h1>
+        <p>Thank you for your payment. Your transaction has been completed successfully.</p>
+        
+        {% if payment_details %}
+        <div class="detail-row">
+            <span>Product:</span>
+            <span>{{ payment_details.product_name }}</span>
+        </div>
+        <div class="detail-row">
+            <span>Base Amount:</span>
+            <span>${{ payment_details.base_amount }}</span>
+        </div>
+        <div class="detail-row">
+            <span>VAT (20%):</span>
+            <span>${{ payment_details.vat_amount }}</span>
+        </div>
+        <div class="detail-row" style="font-weight: bold;">
+            <span>Total Amount:</span>
+            <span>${{ payment_details.total_amount }}</span>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
