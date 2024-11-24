@@ -51,6 +51,19 @@ STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
+SSLCOMMERZ_STORE_ID = os.getenv('SSLCOMMERZ_STORE_ID')
+SSLCOMMERZ_STORE_PASSWORD = os.getenv('SSLCOMMERZ_STORE_PASSWORD')
+SSLCOMMERZ_API_URL = 'https://sandbox.sslcommerz.com/gwprocess/v4/api.php'  # Use sandbox for testing
+SSLCOMMERZ_VALIDATION_URL = 'https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php'
+
+
+# Add these settings
+CSRF_TRUSTED_ORIGINS = [
+    'https://sandbox.sslcommerz.com',
+    'https://securepay.sslcommerz.com',
+    'https://bf76-103-209-109-230.ngrok-free.app',
+]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
