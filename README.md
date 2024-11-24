@@ -2,7 +2,7 @@ added stripe payment gateway and sslcommerz payment gateway
 
 
 
-need to add other payment gateways
+need to add other payment gateways like paypal
 
 
 
