@@ -10,12 +10,14 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            font-size: 0.9em;
         }
         
         th, td {
-            padding: 12px;
+            padding: 8px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            white-space: nowrap;
         }
         
         th {
@@ -28,9 +30,10 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            overflow-x: auto;
         }
         
         .receipt-link {
@@ -70,10 +73,12 @@
         <table>
             <thead>
                 <tr>
-                    <th>Date</th>
+                    <th>Date Created</th>
+                    <th>Date Updated</th>
                     <th>Customer Email</th>
                     <th>Product</th>
                     <th>Amount</th>
+                    <th>Amount Type</th>
                     <th>Currency</th>
                     <th>Status</th>
                     <th>Receipt</th>
@@ -83,9 +88,11 @@
                 {% for payment in payments %}
                 <tr>
                     <td>{{ payment.created|timestamp_to_datetime|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ payment.updated|timestamp_to_datetime|date:"Y-m-d H:i:s" }}</td>
                     <td>{{ payment.customer_email }}</td>
                     <td>{{ payment.product_name }}</td>
-                    <td>${{ payment.amount_in_dollars }}</td>
+                    <td>${{ payment.amount }}</td>
+                    <td>{{ payment.amount_type }}</td>
                     <td>{{ payment.currency|upper }}</td>
                     <td>
                         <span class="status-badge status-{{ payment.payment_status }}">
@@ -102,7 +109,7 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="7" style="text-align: center;">No payments found</td>
+                    <td colspan="9" style="text-align: center;">No payments found</td>
                 </tr>
                 {% endfor %}
             </tbody>
